@@ -8,16 +8,16 @@ import {Component} from '@angular/core';
       <form>
       <div class = "form-group has-feedback"  [ngClass]="{ 'has-error' : !name.valid }">
        <label for = "username">Username</label>
-      <input type = "text" class="form-control" name = "uname" id = "uname" placeholder = "Enter your id" (keyup)="Onsubmit()" [(ngModel)]="uname"  required = "true" minlength = 4 maxlength = 8 #name = "ngModel" >
+      <input type = "text" class="form-control" name = "uname" id = "uname" placeholder = "Enter your id"  [(ngModel)]="uname"  (ngModelChange)="Onsubmit()" required = "true" minlength = 4 maxlength = 8 #name = "ngModel" >
       </div>
-
-
-
-      <div class = "form-group" *ngIf = "x>=4&&x<=8">
+      <div *ngIf = "uname.length>=4">
+      <div class = "form-group has-feedback"  [ngClass]="{ 'has-error' : !pass.valid }">
        <label for = "password">Password</label>
-      <input type = "password" class="form-control" name = "pass" placeholder = "required" [(ngModel)]="pass"/>
+      <input type = "password" class="form-control" name = "qpass" id = "qpass" placeholder = "Enter your id"  [(ngModel)]="qpass"  (ngModelChange)="Onsubmit()" required = "true" minlength = 4 maxlength = 8 #pass = "ngModel" >
       </div>
-      <button class = "btn btn-success" (click) = Onsubmit()>Submit</button>
+      </div>
+
+      <button class = "btn btn-success" [disabled]="check" (click) = Onsubmit()>Submit</button>
       </form>
 
       </div>`,
@@ -26,10 +26,20 @@ import {Component} from '@angular/core';
 export class AppComponent{
      name = "Form";
      uname = '';
-     x = 0;
+     qpass = '';
+     check = true;
      Onsubmit()
      {
-        this.x = this.uname.length;
+     if(this.qpass.length>=4)
+     {
+        this.check = false;
+     }
+     else()
+     {
+      this.check = true;
+     }
+
      console.log(this.uname.length);
      }
+
 }
