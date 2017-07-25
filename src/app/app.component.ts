@@ -8,16 +8,26 @@ import {Component} from '@angular/core';
       <form>
       <div class = "form-group has-feedback"  [ngClass]="{ 'has-error' : !name.valid }">
        <label for = "username">Username</label>
-      <input type = "text" class="form-control" name = "uname" id = "uname" placeholder = "Enter your id"  [(ngModel)]="uname"  (ngModelChange)="Onsubmit()" required = "true" minlength = 4 maxlength = 8 #name = "ngModel" >
+      <input type = "text" class="form-control" name = "uname" id = "uname" placeholder = "Enter your id"  [(ngModel)]="uname" required = "true" minlength = 4 maxlength = 8 #name = "ngModel" >
       </div>
       <div *ngIf = "uname.length>=4">
       <div class = "form-group has-feedback"  [ngClass]="{ 'has-error' : !pass.valid }">
        <label for = "password">Password</label>
-      <input type = "password" class="form-control" name = "qpass" id = "qpass" placeholder = "Enter your id"  [(ngModel)]="qpass"  (ngModelChange)="Onsubmit()" required = "true" minlength = 4 maxlength = 8 #pass = "ngModel" >
+      <input type = "password" class="form-control" name = "qpass" id = "qpass" placeholder = "Enter your id"  [(ngModel)]="qpass"   required = "true" minlength = 4 maxlength = 8 #pass = "ngModel" >
       </div>
       </div>
-
-      <button class = "btn btn-success" [disabled]="check" (click) = Onsubmit()>Submit</button>
+      <div *ngIf = "qpass.length>=4">
+      <div class = "radio">
+      <label><input type = "radio" name = "optradio" [(ngModel)]="gender" value = "Male">Male</label>
+      </div>
+      <div class = "radio">
+      <label><input type = "radio" name = "optradio" [(ngModel)]="gender" value = "Female">Female</label>
+      </div>
+      </div>
+      <div class = "" *ngIf = "gender">
+      <label>Date of Birth<input type = "date" name = "date" [max] = "today" [(ngModel)]="dob"></label>
+      </div>
+      <button class = "button btn btn-success" [disabled]="!dob" (click) = "Onsubmit()">Submit</button>
       </form>
 
       </div>`,
@@ -28,18 +38,17 @@ export class AppComponent{
      uname = '';
      qpass = '';
      check = true;
-     Onsubmit()
-     {
-     if(this.qpass.length>=4)
-     {
-        this.check = false;
-     }
-     else()
-     {
-      this.check = true;
-     }
+     gender = "";
+     dob = "";
 
-     console.log(this.uname.length);
+    today= new Date();
+
+
+         Onsubmit()
+     {
+  m = this.today.getMonth();
+     console.log(m);
+
      }
 
 }
