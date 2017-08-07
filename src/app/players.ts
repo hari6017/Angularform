@@ -1,5 +1,6 @@
+
 export class PLAYER
 {
 name : string;
-centuries : number;
+type : string;
 }
